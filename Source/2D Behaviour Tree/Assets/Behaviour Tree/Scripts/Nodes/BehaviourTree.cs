@@ -9,6 +9,13 @@ public class BehaviourTree : Node
         name = "tree";
     }
 
+
+    public override Status Evaluate()
+    {
+        return children[CurrentChild].Evaluate();
+    }
+
+
     public void PrintTree()
     {
         string treePrintOut = "";

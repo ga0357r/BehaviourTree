@@ -2,6 +2,18 @@
 
 public class Node
 {
+    protected string name;
+    protected Status status;
+    protected List<Node> children =  new List<Node>();
+    public int CurrentChild { get; set; }
+
+    public enum Status
+    {
+        FAILURE,
+        SUCCESS,
+        RUNNING
+    }
+
     public Node()
     {
 
@@ -11,15 +23,16 @@ public class Node
     {
         this.name = name;
     }
-
-    protected string name;
-    protected Status status;
-    protected List<Node> children =  new List<Node>();
-    private int currentChild = 0;
-
-    protected virtual Status Evaluate()
+    
+    public Node(string name, List<Node> children)
     {
-        return status;
+        this.name = name;
+        this.children = children;
+    }
+
+    public virtual Status Evaluate()
+    {
+        return Status.SUCCESS;
     }
 
     public void AddChild(Node child)
@@ -36,11 +49,4 @@ public class Node
     {
         return children;
     }
-}
-
-public enum Status
-{
-    FAILURE,
-    SUCCESS,
-    RUNNING
 }
