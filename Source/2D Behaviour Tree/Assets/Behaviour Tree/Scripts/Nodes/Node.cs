@@ -27,6 +27,15 @@ public class Node
         children.Add(child);
     }
 
+    public string GetName()
+    {
+        return name;
+    }
+
+    public List<Node> GetChildren()
+    {
+        return children;
+    }
 }
 
 public enum Status
