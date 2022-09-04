@@ -49,4 +49,9 @@ public class Node
     {
         return children;
     }
+
+    public Status GetStatus()
+    {
+        return status;
+    }
 }

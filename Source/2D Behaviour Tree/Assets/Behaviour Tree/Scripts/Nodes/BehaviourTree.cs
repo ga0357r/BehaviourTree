@@ -9,6 +9,13 @@ public class BehaviourTree : Node
         name = "tree";
     }
 
+    public BehaviourTree(string name) : base(name)
+    {
+    }
+
+    public BehaviourTree(string name, List<Node> children) : base(name, children)
+    {
+    }
 
     public override Status Evaluate()
     {
