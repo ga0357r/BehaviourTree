@@ -474,8 +474,10 @@ MonoBehaviour:
   - {fileID: 1231033998}
   - {fileID: 1794380569}
   - {fileID: 720122514}
-  isDifferentOrganismSeen: 1
+  isDifferentOrganismSeen: 0
+  isFoodSeen: 0
   treeStatus: 2
+  actionState: 0
 --- !u!4 &1197447585
 Transform:
   m_ObjectHideFlags: 0
