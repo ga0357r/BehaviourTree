@@ -26,14 +26,16 @@ namespace BehaviourTree
 
             if (childStatus == Status.RUNNING)
             {
-                return Status.RUNNING;
+                status = Status.RUNNING;
+                return status;
             }
 
             if (childStatus == Status.SUCCESS)
             {
                 CurrentChild = 0;
                 isShuffled = false;
-                return Status.SUCCESS;
+                status = Status.SUCCESS;
+                return status;
             }
 
             CurrentChild++;
@@ -41,10 +43,12 @@ namespace BehaviourTree
             {
                 CurrentChild = 0;
                 isShuffled = false;
-                return Status.FAILURE;
+                status = Status.FAILURE;
+                return status;
             }
 
-            return Status.RUNNING;
+            status = Status.RUNNING;
+            return status;
         }
     }
 }

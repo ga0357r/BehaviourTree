@@ -41,7 +41,8 @@ namespace BehaviourTree
 
         public virtual Status Evaluate()
         {
-            return Status.SUCCESS;
+            status = Status.SUCCESS;
+            return status;
         }
 
         public void AddChild(Node child)

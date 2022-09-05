@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace BehaviourTree
 {
     public class Leaf : Node
@@ -5,10 +7,21 @@ namespace BehaviourTree
         public delegate Status Tick();
         private Tick action;
 
+        public delegate Status TickMulti(int index);
+        private TickMulti actionMulti;
+        public int index;
+
         public Leaf(string name, Tick action)
         {
             this.name = name;
             this.action = action;
+        }
+
+        public Leaf(string name, int index, TickMulti actionMulti)
+        {
+            this.name = name;
+            this.index = index;
+            this.actionMulti = actionMulti;
         }
 
         public Leaf(string name, Tick action, int priority)
@@ -25,7 +38,14 @@ namespace BehaviourTree
                 return action();
             }
 
+            else if (actionMulti != null)
+            {
+                return actionMulti(index);
+            }
+            
+            Debug.Log(name + " " + status);
             return Status.FAILURE;
+            
         }
     }
 }

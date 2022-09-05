@@ -71,7 +71,8 @@ namespace BehaviourTree
 
             if (childStatus == Status.RUNNING)
             {
-                return Status.RUNNING;
+                status = Status.RUNNING;
+                return status;
             }
 
             if (childStatus == Status.SUCCESS)
@@ -79,7 +80,8 @@ namespace BehaviourTree
                 children[CurrentChild].Priority = 1;
                 CurrentChild = 0;
                 isPrioritized = false;
-                return Status.SUCCESS;
+                status = Status.SUCCESS;
+                return status;
             }
 
             else
@@ -92,10 +94,12 @@ namespace BehaviourTree
             {
                 CurrentChild = 0;
                 isPrioritized = false;
-                return Status.FAILURE;
+                status = Status.FAILURE;
+                return status;
             }
 
-            return Status.RUNNING;
+            status = Status.RUNNING;
+            return status;
         }
     }
 }

@@ -18,22 +18,26 @@ namespace BehaviourTree
 
             if (childStatus == Status.RUNNING)
             {
-                return Status.RUNNING;
+                status = Status.RUNNING;
+                return status;
             }
 
             if (childStatus == Status.FAILURE)
             {
-                return childStatus;
+                status = Status.FAILURE;
+                return status;
             }
 
             CurrentChild++;
             if (CurrentChild >= children.Count)
             {
                 CurrentChild = 0;
-                return Status.SUCCESS;
+                status = Status.SUCCESS;
+                return status;
             }
 
-            return Status.RUNNING;
+            status = Status.RUNNING;
+            return status;
         }
     }
 }
