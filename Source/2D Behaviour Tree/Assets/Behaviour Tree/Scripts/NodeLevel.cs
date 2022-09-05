@@ -1,5 +1,8 @@
-public struct NodeLevel
+namespace BehaviourTree
 {
-    public int level;
-    public Node node;
+    public struct NodeLevel
+    {
+        public int level;
+        public Node node;
+    }
 }

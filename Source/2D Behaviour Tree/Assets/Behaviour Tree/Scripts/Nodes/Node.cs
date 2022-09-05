@@ -1,57 +1,67 @@
 ﻿using System.Collections.Generic;
 
-public class Node
+namespace BehaviourTree
 {
-    protected string name;
-    protected Status status;
-    protected List<Node> children =  new List<Node>();
-    public int CurrentChild { get; set; }
-
-    public enum Status
+    public class Node
     {
-        FAILURE,
-        SUCCESS,
-        RUNNING
-    }
+        protected string name;
+        protected Status status;
+        protected List<Node> children = new List<Node>();
+        public int CurrentChild { get; set; }
+        public int Priority { get; set; }
 
-    public Node()
-    {
+        public enum Status
+        {
+            FAILURE,
+            SUCCESS,
+            RUNNING
+        }
 
-    }
+        public Node()
+        {
 
-    public Node(string name)
-    {
-        this.name = name;
-    }
-    
-    public Node(string name, List<Node> children)
-    {
-        this.name = name;
-        this.children = children;
-    }
+        }
 
-    public virtual Status Evaluate()
-    {
-        return Status.SUCCESS;
-    }
+        public Node(string name)
+        {
+            this.name = name;
+        }
 
-    public void AddChild(Node child)
-    {
-        children.Add(child);
-    }
+        public Node(string name, List<Node> children)
+        {
+            this.name = name;
+            this.children = children;
+        }
 
-    public string GetName()
-    {
-        return name;
-    }
+        public Node(string name, int priority)
+        {
+            this.name = name;
+            Priority = priority;
+        }
 
-    public List<Node> GetChildren()
-    {
-        return children;
-    }
+        public virtual Status Evaluate()
+        {
+            return Status.SUCCESS;
+        }
 
-    public Status GetStatus()
-    {
-        return status;
+        public void AddChild(Node child)
+        {
+            children.Add(child);
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
+
+        public List<Node> GetChildren()
+        {
+            return children;
+        }
+
+        public Status GetStatus()
+        {
+            return status;
+        }
     }
 }

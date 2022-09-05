@@ -2,12 +2,15 @@ using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BehaviourTree;
 
 public class EnemyChild : MonoBehaviour
 {
-    private BehaviourTree tree;
+    private Root tree;
     private Path path;
     private int currentWaypoint = 0;
+    [SerializeField] private float waitTime;
+    [SerializeField] private float currentTime;
     [SerializeField] private int movementSpeed = 5;
     [SerializeField] private float nextWaypointDistance = 2f;
     [SerializeField] private Seeker seeker;
@@ -16,6 +19,7 @@ public class EnemyChild : MonoBehaviour
     [SerializeField] private bool isFoodSeen = false;
     [SerializeField] private Node.Status treeStatus = Node.Status.RUNNING;
     [SerializeField] private ActionState actionState;
+    [SerializeField] private Camera mainCam;
 
     private enum ActionState
     {
@@ -26,23 +30,19 @@ public class EnemyChild : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        waitTime = Random.Range(0.01f, 10f);
         ConstructBehaviourTree();
-        tree.PrintTree();
+        StartCoroutine(RunBehaviourTree());
     }
 
     private void Update()
     {
-        //if (treeStatus != Node.Status.SUCCESS)
-        //{
-        //    treeStatus = tree.Evaluate();
-        //}
-
-        treeStatus = tree.Evaluate();
+        IsMainCameraCloseBy();
     }
 
     private void ConstructBehaviourTree()
     {
-        tree = new BehaviourTree();
+        tree = new Root();
 
         //Random Movement Branch
         Leaf isFoodSeen = new Leaf("Is Food Seen -- Leaf Node", IsFoodSeen);
@@ -96,7 +96,7 @@ public class EnemyChild : MonoBehaviour
 
     private Node.Status MoveRandomly()
     {
-        return SetDestination(posOfInterests[1].position);
+        return SetDestination(ChooseRandomPointOfInterest());
     }
 
     private Node.Status SetDestination(Vector2 target)
@@ -144,5 +144,56 @@ public class EnemyChild : MonoBehaviour
         float distance = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
         if (distance < nextWaypointDistance && currentWaypoint < path.vectorPath.Count) currentWaypoint++;
         return Node.Status.RUNNING;
+    }
+
+    private int GenerateRandomIndex(int arrayLength)
+    {
+        System.Random random = new System.Random();
+        int randomNumber = random.Next(0, arrayLength - 1);
+        return randomNumber;
+    }
+
+    private Vector2 ChooseRandomPointOfInterest()
+    {
+        int randomIndex = GenerateRandomIndex(posOfInterests.Count);
+        return posOfInterests[randomIndex].position;
+    }
+
+    private void IsMainCameraCloseBy()
+    {
+        float distanceToCamera = Vector2.Distance(transform.position, mainCam.transform.position);
+        
+
+        //if camera distance is less than 10
+        if (distanceToCamera < 10)
+        {
+            waitTime = 0.01f;
+        }
+        // behaviour tree updates faster
+
+        //else 
+        else
+        {
+            waitTime = 0.1f;
+        }
+        //behaviour tree updates less
+
+        Debug.Log(distanceToCamera);
+    }
+
+    public IEnumerator RunBehaviourTree()
+    {
+        while (true)
+        {
+            currentTime += Time.deltaTime;
+
+            if (currentTime >= waitTime)
+            {
+                treeStatus = tree.Evaluate();
+                currentTime = 0;
+            }
+            
+            yield return null;
+        }
     }
 }

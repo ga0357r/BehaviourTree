@@ -2,18 +2,26 @@ using System.Collections.Generic;
 
 namespace BehaviourTree
 {
-    public class Selector : Node
+    public class RandomSelector : Selector
     {
-        public Selector(string name) : base(name)
+        private bool isShuffled = false;
+
+        public RandomSelector(string name) : base(name)
         {
         }
 
-        public Selector(string name, List<Node> children) : base(name, children)
+        public RandomSelector(string name, List<Node> children) : base(name, children)
         {
         }
 
         public override Status Evaluate()
         {
+            if (!isShuffled)
+            {
+                children.Shuffle();
+                isShuffled = true;
+            }
+
             Status childStatus = children[CurrentChild].Evaluate();
 
             if (childStatus == Status.RUNNING)
@@ -24,6 +32,7 @@ namespace BehaviourTree
             if (childStatus == Status.SUCCESS)
             {
                 CurrentChild = 0;
+                isShuffled = false;
                 return Status.SUCCESS;
             }
 
@@ -31,6 +40,7 @@ namespace BehaviourTree
             if (CurrentChild >= children.Count)
             {
                 CurrentChild = 0;
+                isShuffled = false;
                 return Status.FAILURE;
             }
 

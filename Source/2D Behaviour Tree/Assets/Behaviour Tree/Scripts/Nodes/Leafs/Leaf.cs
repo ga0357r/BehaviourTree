@@ -1,21 +1,31 @@
-public class Leaf : Node
+namespace BehaviourTree
 {
-    public delegate Status Tick();
-    private Tick Action;
-
-    public Leaf(string name, Tick Action)
+    public class Leaf : Node
     {
-        this.name = name;
-        this.Action = Action;
-    }
+        public delegate Status Tick();
+        private Tick action;
 
-    public override Status Evaluate()
-    {
-        if (Action != null)
+        public Leaf(string name, Tick action)
         {
-            return Action();
+            this.name = name;
+            this.action = action;
         }
 
-        return Status.FAILURE;
+        public Leaf(string name, Tick action, int priority)
+        {
+            this.name = name;
+            this.action = action;
+            Priority = priority;
+        }
+
+        public override Status Evaluate()
+        {
+            if (action != null)
+            {
+                return action();
+            }
+
+            return Status.FAILURE;
+        }
     }
 }
