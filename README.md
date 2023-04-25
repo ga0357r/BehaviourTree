@@ -16,7 +16,7 @@ Contributions to this implementation are welcome! If you find a bug, have a feat
 # License
 This implementation is released under the Apache 2.0 License, which means you are free to use and modify it as you wish, as long as you include the original license and copyright information.
 
+Feel free to customize this Behaviour Tree template to fit your specific implementation and requirements.
+
 # Assets/Tools Used
 This project uses the free version of the A* Pathfinding Project by arongranberg
-
-Feel free to customize this template to fit your specific implementation and requirements.
