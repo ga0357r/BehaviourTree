@@ -8,7 +8,7 @@ Allows easy customization and extension of behavior tree nodes to fit different 
 # Getting Started
 To use this implementation, simply download or clone the repository, open the Unity project. Based on the example EnemyChild script, you can create your own script that references the behaviour tree or customize the existing EnemyChild script. You can also customize and extend the behavior nodes as needed to create your desired behavior tree.
 
-You can also extract the Behaviour Tree Folder that contains the "Behavior Tree.asmd"and put it in your own project to start using the Behaviour Tree API.
+You can also extract the Behaviour Tree Folder that contains the "Behavior Tree.asmdef"and put it in your own project to start using the Behaviour Tree API.
 
 # Contributing
 Contributions to this implementation are welcome! If you find a bug, have a feature request, or want to contribute to the code, please submit an issue or pull request on GitHub.
