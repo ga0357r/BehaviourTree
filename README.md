@@ -10,9 +10,6 @@ To use this implementation, simply download or clone the repository, open the Un
 
 You can also extract the Behaviour Tree Folder that contains the "Behavior Tree.asmdef"and put it in your own project to start using the Behaviour Tree API.
 
-# Contributing
-Contributions to this implementation are welcome! If you find a bug, have a feature request, or want to contribute to the code, please submit an issue or pull request on GitHub.
-
 # License
 This implementation is released under the Apache 2.0 License, which means you are free to use and modify it as you wish, as long as you include the original license and copyright information.
 
